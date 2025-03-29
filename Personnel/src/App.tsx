@@ -1,13 +1,12 @@
-import './App.css'
-import NavBar from './components/NavBar'
+import "./App.css";
+import Personnel from "./components/Personnel";
 
 function App() {
-
   return (
-    <div className='@container'>
-    <NavBar/>
+    <div className="@container h-dvh">
+      <Personnel />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

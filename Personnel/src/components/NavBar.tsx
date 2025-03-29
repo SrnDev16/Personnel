@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../assets/images/logo.png";
 import { FaBars } from "react-icons/fa";
 import Group from "../data/Group";
 import { FaAngleDown } from "react-icons/fa";
+import { DataContext } from "./Personnel";
 
 const NavBar = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen(!open);
+
+  const title = useContext(DataContext);
 
   console.log(open);
 
@@ -22,7 +25,9 @@ const NavBar = () => {
                 alt=""
                 className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]"
               />
-              <p className="text-white">สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาบึงกาฬ</p>
+              <p className="text-white">
+                สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาบึงกาฬ
+              </p>
             </div>
             <div className="flex items-center">
               <a
@@ -34,7 +39,7 @@ const NavBar = () => {
               <a
                 href="#"
                 onClick={handleOpen}
-                className="hidden md:flex items-center text-white border-2 border-white p-1 rounded hover:bg-white hover:text-purple-400"
+                className="hidden md:flex items-center rounded-lg text-white px-3.5 border-2 border-white p-1 hover:bg-white hover:text-purple-400"
               >
                 กลุ่มงาน <FaAngleDown className="ml-1" />
               </a>
@@ -46,14 +51,19 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className={`${!open ? "hidden" : "block"} `}>
-        <ul className="border rounded ml-auto border-gray-200 md:w-2xl">
+      <div className={`${!open ? "hidden" : "block"} rounded-lg bg-white absolute top-15 right-0 md:right-60`}>
+        <ul className="border rounded-lg ml-auto border-gray-200 drop-shadow-md md:w-2xl">
           {Group.map((item, index) => {
             return (
               <li
+                onClick={() => {
+                  {
+                    title?.setData(item);
+                    handleOpen();
+                  }
+                }}
                 key={index}
                 className="border-b border-gray-100 p-1 hover:bg-gray-200"
-          
               >
                 <p className="text-center">{item}</p>
               </li>
